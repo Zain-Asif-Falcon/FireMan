@@ -1,0 +1,99 @@
+﻿@model Domain.ViewModel.Master.SectionSeriesViewModel
+@{
+    var title = (Model.series.SectionSerialId > 0) ? "Update" : "Save";
+    title = title + "";
+    ViewData["Title"] = title;
+
+    Layout = null;
+}
+<style>
+
+    .validate-message {
+        color: #d50000;
+        position: absolute;
+        right: 0;
+        padding: .75rem;
+        font-size: 1rem;
+        line-height: 1;
+        border: 2px solid transparent;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('form');
+    });
+</script>
+<form asp-controller="SectionSerial" 
+          asp-action="Upsert" 
+          id="ItemForm"        
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group" hidden>
+            <input asp-for="series.SectionSerialId" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+
+        @if (Model.series.SectionSerialId > 0)
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label">Page</label>
+                    <select id="PagesDropdown" class="form-select" asp-for="categoryId" asp-items="@ViewBag.CategoryList" onchange="CategoryChapters()">
+                        <option value="" selected> Sélectionner une Page </option>
+                    </select>
+                    <span asp-validation-for="categoryId" class="text-danger"></span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label">Sections</label>
+                    <select id="SectionsDropdown" class="form-select" asp-for="series.SectionId" aria-label="Default select example">
+                        <option disabled selected> Sélectionner Section </option>
+                    </select>
+                    <span asp-validation-for="series.SectionId" class="text-danger"></span>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="form-label">Series Nom</label>
+                <input  maxlength="100" asp-for="series.SeriesName" id="series_SeriesName" class="form-control" />
+                <span asp-validation-for="series.SeriesName" class="text-danger"></span>
+            </div>
+        </div>     
+    </div> 
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#ItemForm").validate();
+        
+        $("#PagesDropdown").rules("add", {
+            required: true,
+            messages: {
+                required: "Veuillez sélectionner une catégorie"
+            }
+        });    
+        $("#series_SeriesName").rules("add", {
+            required: true,
+            messages: {
+                required: "Veuillez entrer le nom de la série"
+            }
+        });
+        
+        $("#series_ReferenceCode").rules("add", {
+            required: true,
+            messages: {
+                required: "Veuillez entrer la référence du code"
+            }
+        });
+
+    });
+</script>
