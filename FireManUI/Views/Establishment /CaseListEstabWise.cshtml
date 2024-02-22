@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Domain.Contracts.V1.CaseFiles.CaseFilesContract>
+@{
+    Layout = null;
+}
+<div class="table-responsive">
+    <table id="tblData" class="table table-striped table-bordered mt-0 table-card table-nowrap" style="width:100%">
+        <thead>
+            <tr>
+                @*<th>Numéro d’ordre</th>*@
+                <th>Type de cas</th>
+                <th>Type de visite</th>             
+                @*<th>Action</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                @*<td>
+                    @item.CaseFileId
+                </td>*@
+                <td style="width:10%">
+                    @item.CaseTypeName
+                </td>
+                <td>
+                    @item.VisitTypeName
+                </td>             
+   <i class="fa fa-pencil"></i>
+            </a>   
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts{
+
+    <script src="~/js/CheckList/CheckList.js"></script>
+}
