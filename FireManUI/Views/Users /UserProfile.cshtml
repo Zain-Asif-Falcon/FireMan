@@ -1,0 +1,149 @@
+﻿@model Domain.Contracts.V1.UserProfile
+@{
+    var title = "User Profile";
+    title = title + "";
+    ViewData["Title"] = title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string picUrl = "";
+}
+
+<link rel="stylesheet" href="~/js/Vendors/Toaster/css/toastr.min.css" />
+<link rel="stylesheet" href="~/js/Vendors/SweetAlert/css/sweetalert.min.css" />
+
+<!--//Page Toolbar//-->
+<div class="toolbar p-4 pb-0">
+    <div class="container-fluid px-0">
+        <div class="row align-items-center position-relative">
+            <div class="col-md-8 mb-4 mb-md-0">
+                <h3 class="mb-2">Profil </h3>
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">              
+                        <li class="breadcrumb-item active">Profil</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-md-4 text-md-end">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--//Page Toolbar End//-->
+<!--//Page content//-->
+
+<div class="content p-4 d-flex flex-column-fluid">
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-12">
+                @*@using (Html.BeginForm())
+                    {*@
+                @*@Html.AntiForgeryToken()*@
+                <div class="card" style="padding:15px">
+                    <form enctype="multipart/form-data">
+                        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                        <div class="row">
+                            <div class="form-group" hidden>
+                                <input asp-for="UserId" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="row">
+                                    <div class=col-md-6>
+                                        <div class="form-group">
+                                            <label class="form-label">Prénom</label>
+                                            <input id="fname" onkeyup="handleInputForFirstName()" type="text" asp-for="FirstName" class="form-control form-control-lg" />
+                                            <span asp-validation-for="FirstName" id="err-fname" class="text-danger"></span>
+                                        </div>                                    
+                                
+                                        <div class="form-group">
+
+                                            <button style="float:right;margin-top:20px;margin-right: 0" type="submit" class="btn btn-primary"><i class="fa fa-save" aria-hidden="false"></i>&nbsp; Sauver </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                          
+                            <div class="col-md-3">
+                                <center>
+                                    @if (Model.ProfilePicture == null)
+                                    {
+                                        picUrl = "/media/Profile.png";
+                                    }
+                                    else
+                                    {
+
+                                        //picUrl = Model.ProfilePicture;
+                                        picUrl = Url.Content(Model.ProfilePicture);
+                                    }
+                                    <image id="profileImage" style="width: 80%;min-height:250px; max-height: 250px" src="@picUrl" class="img img-responsive img-thumbnail" />
+                                  
+                                </center>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                @*  *@
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+</style>
+<!--////////////Theme Core scripts Start/////////////////-->
+
+
+<script src="/js/theme.bundle.js"></script>
+<script src="/vendor/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<!--////////////Theme Core scripts End/////////////////-->
+<script>
+ 
+    function previewProfileImage(uploader) {
+        //ensure a file was selected
+
+        var ext = $('#imageUpload').val().split('.').pop().toLowerCase();
+        console.log(ext);
+        if (ext !== 'png' && ext !== 'jpg' && ext !== 'jpeg' && ext !== 'gif') {
+            swal({
+                title: "Oups ... !",
+                type: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ok",
+                text: 'Veuillez télécharger uniquement le fichier d\'images.'
+            });
+            var $el = $('#imageUpload');
+            $el.wrap('<form>').closest(
+                'form').get(0).reset();
+            $el.unwrap();
+            return false;
+        }
+        else
+        {
+            if (uploader.files && uploader.files[0]) {
+                var imageFile = uploader.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    //set the image data as source
+                    $('#profileImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(imageFile);
+            }
+        }
+
+    }
+
+</script>
+
+<script src="~/js/Vendors/Toaster/js/toastr.min.js"></script>
+<script src="~/js/Vendors/SweetAlert/js/sweetalert.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
