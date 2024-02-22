@@ -19,7 +19,7 @@
 ## Technologies Used
 - Programming Language: C#
 - Database: SQL
-- Frameworks/Libraries: .NET framework, EF Core Web API
+- Frameworks/Libraries: .NET framework, EF Core, Restful API
 - Frontend: HTML, CSS, JavaScript, React
 - Tools: Visual Studio,SQL Management studio
 
