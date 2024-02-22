@@ -1,0 +1,56 @@
+﻿@model Domain.ViewModel.Master.ServicesViewModel
+@{
+    var title = (Model.service.ServiceId > 0) ? "Update" : "Save";
+    title = title + "";
+    ViewData["Title"] = title;
+
+    Layout = null;
+}
+<style>
+</style>
+<script>
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('form');
+    });
+</script>
+<form      
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group" hidden>
+            <input asp-for="service.ServiceId" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+
+        @if (Model.service.ServiceId > 0)
+        {
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">SDIS</label>
+                    <select id="SDISDropdown" class="form-select" asp-for="sdisId" asp-items="@ViewBag.SDISList" onchange="SDISGroup()">
+                        <option selected> Sélectionner SDIS</option>
+                    </select>
+                </div>
+            </div>
+        }
+        else
+        {          
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Groupe</label>
+                    <select id="GroupsDropdown" class="form-select" asp-for="service.GroupId" aria-label="Default select example">
+                        <option disabled selected> Sélectionner Group </option>
+                    </select>
+                    <span asp-validation-for="service.GroupId" class="text-danger"></span>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="modal-footer" style="padding-bottom:0 !important; padding-right:0!important">
+        <button type="submit" class="btn btn-primary"><i class="fa fa-save" aria-hidden="false"></i> &nbsp; SAUVEGARDER</button>
+        <button type="reset" class="btn btn-secondary"><i class="fa fa-remove" aria-hidden="false"></i> &nbsp; EFFACER</button>
+    </div>
+</form>
+    
