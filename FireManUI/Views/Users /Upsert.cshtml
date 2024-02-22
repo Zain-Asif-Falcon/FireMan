@@ -1,0 +1,153 @@
+﻿@model Domain.ViewModel.Users.UserViewModel
+@{
+    var title = (Model.employee.EmployeeId > 0) ? "Update" : "Save";
+    title = title + "";
+    ViewData["Title"] = title;
+
+    Layout = null;
+}
+<style>
+</style>
+<script>
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('form');
+    });
+</script>
+<form 
+      onclick="this.removeAttribute('readOnly');">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group" hidden>
+            <input asp-for="employee.EmployeeId" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-label">SDIS</label>
+                <select id="SDISDropdown" asp-for="SDISId" class="form-select" asp-items="@ViewBag.SDISList" onchange="SDISGroup()">
+                    <option disabled selected> Sélectionner SDIS</option>
+                </select>
+                <span asp-validation-for="SDISId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @if (Model.employee.EmployeeId > 0)
+            {
+                <div class="form-group">
+                    <label class="form-label">Group</label>
+                    <select id="GroupsDropdown" class="form-select" asp-for="employee.GroupId" asp-items="@ViewBag.GroupsList" aria-label="Default select example" onchange="GroupServices()">
+                        <option disabled selected> Sélectionner Group  </option>
+                    </select>
+                    <span asp-validation-for="employee.GroupId" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label class="form-label">Group</label>
+                    <select id="GroupsDropdown" class="form-select" asp-for="employee.GroupId" aria-label="Default select example" onchange="GroupServices()">
+                        <option disabled selected> Sélectionner Group </option>
+                    </select>
+                    <span asp-validation-for="employee.GroupId" class="text-danger"></span>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @if (Model.employee.EmployeeId > 0)
+            {
+                <div class="form-group">
+                    <label class="form-label">Service</label>
+                    <select id="ServiceDropdown" asp-for="employee.ServiceId" asp-items="@ViewBag.ServicesList" class="form-select">
+                        <option disabled selected> Sélectionner Service</option>
+                    </select>
+                    <span asp-validation-for="employee.ServiceId" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label class="form-label">Service</label>
+                    <select id="ServiceDropdown" asp-for="employee.ServiceId" class="form-select">
+                        <option disabled selected> Sélectionner Service</option>
+                    </select>
+                    <span asp-validation-for="employee.ServiceId" class="text-danger"></span>
+                </div>
+            }      
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-label">Numéro de cellule</label>
+                <input type="text" asp-for="employee.CellNo" id="mobileNumber" class="form-control form-control-md" />
+                <span asp-validation-for="employee.CellNo" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    @if (Model.employee.EmployeeId == 0)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" asp-for="employee.Password" class="form-control form-control-md" autocomplete="off" />
+                    <span asp-validation-for="employee.Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div> 
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="form-label">Adresse</label>
+                <textarea asp-for="employee.PostalAddress" class="form-control form-control-md"  rows="3"></textarea>
+                <span asp-validation-for="employee.PostalAddress" class="text-danger"></span>
+            </div>
+        </div>
+    </div>  
+</form>
+
+
+<script>
+
+ $(document).ready(function () {
+        
+        $('#ItemForm').attr('autocomplete', 'off');
+
+        $("#ItemForm").validate();
+        
+        $("#SDISDropdown").rules("add", {
+            required: true,
+            messages: {
+                required: "Veuillez sélectionner un SDIS"
+            }
+        });      
+
+        jQuery.validator.addMethod("CheckNumber", function () {
+            //debugger;
+            var re = /^0{1}[\d]{9}$/;
+            //$.validator.messages.CheckNumber = 'Entrez un numéro de téléphone valide';
+            var result = re.test($('#mobileNumber').val());
+            $('.iti').css("height", "35%");
+            //var value = $('#CompanyOperatorContactNo').val();
+            var k = $('#mobileNumber').val().length;
+            if (k == "" || k == null) {
+                $.validator.messages.CheckNumber = 'Entrez un numéro de téléphone valide';
+                return false;
+            }
+            else if (k < 10) {
+                $.validator.messages.CheckNumber = "le numéro ne peut pas être inférieur à 10 chiffres !";
+                return false
+            }
+            else if (k > 10) {
+                $.validator.messages.CheckNumber = "Vous avez dépassé le nombre limite !";
+                return false
+                }
+            return result;
+        });
+
+    });
+</script>
