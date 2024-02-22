@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+
+<!--//Page Toolbar//-->
+<div class="toolbar p-4 pb-0">
+    <div class="container-fluid px-0">  
+                <h3 class="mb-2">Liste de contrôle de l'onglet ouvert</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Domicile</a></li>                
+                    </ol>
+                </nav>
+            </div>      
+</div>
+
+<!--//Page content//-->
+<div class="content p-4 d-flex flex-column-fluid">
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    @*<div>
+                            <div class="table-responsive">
+                                <img src="~/media/loading.gif" style="                                
+                                left: 45%;
+                        " />
+                            </div>
+                        </div>*@
+                    <div class="accordion" id="accordionExample">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--////////////Theme Core scripts Start/////////////////-->
+
+
+<script src="/js/theme.bundle.js"></script>
+<script src="/vendor/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<style>
+    .noBullet > li {
+        list-style: none;
+    }
+
+    .sortableinner {
+        list-style-type: none;
+        margin: 15px;
+        padding: 0;
+    } 
+
+    .sortableinner ul > li {
+        list-style: none;
+        font-size: 0.9em;
+        padding: 5px;
+        background-color: #efefef;
+        border: 1px solid #d1d1d1;
+        }
+</style>
+@*<script src="https://code.jquery.com/jquery-1.9.1.js"></script>*@
+<script src="~/js/CaseFiles/CasefileCheckList.js"></script>
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('.sortableinner').sortable({
+                connectWith: '.sortableinner',
+                placeholder: 'placeholder',
+                items: 'li',
+                stop: function (event, ui) {
+                    var data = $(this).sortable("toArray");
+                    console.log(data);
+                    
+                }
+            }).disableSelection();
+        });
+    });
+</script>
