@@ -1,0 +1,80 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/js/Vendors/Toaster/css/toastr.min.css" />
+
+<!--Datatables-->
+<link rel="stylesheet" href="~/js/Vendors/Datatables/css/rowReorder.dataTables.min.css" />
+<!--//Page Toolbar//-->
+<div class="toolbar p-4 pb-0">
+    <div class="container-fluid px-0">
+        <div class="row align-items-center position-relative">
+            <div class="col-md-8 mb-4 mb-md-0">
+                <h3 class="mb-2">Série de Check-List</h3>
+            <div class="col-md-4 text-md-end">
+                <a id="newItem" data-bs-toggle="modal" class="btn btn-primary EditProductBtn commandBtns" data-bs-target=".bs-example-modal-lg"> <i class="fa fa-plus" aria-hidden="true"> </i> </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//Page Toolbar End//-->
+<!--//Page content//-->
+<div class="content p-4 d-flex flex-column-fluid">
+    <div class="container-fluid px-0">
+        <div class="row">          
+                    <div class="table-responsive">
+                        <div class="table-responsive">                    
+                            position: absolute;
+                            top: 50px;
+                            width: 100px;
+                            left: 45%;
+                    " />
+                            <table id="tblData" class="table table-striped table-bordered mt-0 table-card table-nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Numéro d’ordre</th>
+                                        <th>Nom</th>                                     
+                                        <th>Créé le</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>                       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--////////////Theme Core scripts Start/////////////////-->
+
+
+<script src="/js/theme.bundle.js"></script>
+<script src="/vendor/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<!--////////////Theme Core scripts End/////////////////-->
+@section Scripts{
+    <script src="~/js/Vendors/Toaster/js/toastr.min.js"></script>
+    <script src="~/js/Vendors/SweetAlert/js/sweetalert.min.js"></script>
+
+    <!--Datatables-->
+    <script src="~/js/Vendors/Datatables/js/jquery.dataTables.min.js"></script>  
+    <script src="~/js/Vendors/Datatables/js/dataTables.rowReorder.min.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script> 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Datatables Responsive
+            $("#datatable").DataTable({             
+                "length": false
+            });
+        });
+    </script>
+
+    <script src="~/js/Master/SectionSeries/SectionSeries.js"></script>
+}
