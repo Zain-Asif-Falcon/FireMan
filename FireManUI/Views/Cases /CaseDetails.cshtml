@@ -1,0 +1,62 @@
+﻿@model Domain.Contracts.V1.CaseFiles.CaseFilesContract
+@{
+    var title = "Case File Details";
+    title = title + "";
+    ViewData["Title"] = title;
+
+    Layout = null;
+}
+<style>
+</style>
+<form asp-controller="Users" asp-action="Upsert" id="ItemForm" >
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Case Type</label>
+                <input type="text" readonly disabled asp-for="CaseTypeName" class="form-control form-control-lg" />
+            </div>
+        </div>       
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Establishment Name</label>
+                <input type="text"  readonly disabled asp-for="EstablishmentName" class="form-control form-control-lg" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Origin</label>
+                <input type="text"  readonly disabled asp-for="OriginName" class="form-control form-control-lg" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Case Average</label>
+                <input type="text"  readonly disabled asp-for="CaseAverageName" class="form-control form-control-lg" />
+            </div>       
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Reference #</label>
+                <input type="text"  readonly disabled asp-for="RefNum" class="form-control form-control-lg" />
+            </div>
+        </div>       
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Reception Service Date</label>
+                <input type="text"  readonly disabled asp-for="ReceptionServiceDate" class="form-control form-control-lg" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Employee Name</label>
+                <input type="text"  readonly disabled asp-for="EmployeeName" class="form-control form-control-lg" />
+            </div>
+        </div>
+    </div>
+</form>
