@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/js/Vendors/Toaster/css/toastr.min.css" />
+<link rel="stylesheet" href="~/js/Vendors/SweetAlert/css/sweetalert.min.css" />
+
+<!--Datatables-->
+<link rel="stylesheet" href="~/js/Vendors/Datatables/css/dataTables.bootstrap5.min.css" />
+<!--//Page Toolbar//-->
+<div class="toolbar p-4 pb-0">
+    <div class="container-fluid px-0">
+        <div class="row align-items-center position-relative">
+            <div class="col-md-8 mb-4 mb-md-0">
+                <h3 class="mb-2">Liste des employés</h3>
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">                     
+                        <li class="breadcrumb-item active">Liste des employés</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a id="newItem" data-bs-toggle="modal" class="btn btn-primary EditProductBtn commandBtns" data-bs-target=".bs-example-modal-lg"> <i class="fa fa-plus" aria-hidden="true"> </i> </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//Page Toolbar End//-->
+<!--//Page content//-->
+<div class="content p-4 d-flex flex-column-fluid">
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <div class="table-responsive">               
+                            <table id="tblData" class="table table-striped table-bordered mt-0 table-card table-nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Numéro d’ordre</th>
+                                        <th>Prénom</th>
+                                        <th>Nom de famille</th>                                     
+                                        <th>Inscrit à</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--////////////Theme Core scripts Start/////////////////-->
+
+
+<script src="/js/theme.bundle.js"></script>
+<script src="/vendor/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<!--////////////Theme Core scripts End/////////////////-->
+@section Scripts{
+    <script src="~/js/Vendors/Toaster/js/toastr.min.js"></script>
+    <script src="~/js/Vendors/SweetAlert/js/sweetalert.min.js"></script>
+    <script src="~/js/Users/EmployeeList.js"></script>
+}
